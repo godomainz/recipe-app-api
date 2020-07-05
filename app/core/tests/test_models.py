@@ -2,8 +2,10 @@ from django.test import TestCase
 from django.contrib.auth import get_user_model
 from core import models
 
-def sample_user(email='test@gmail.com',password='testpass'):
-    return get_user_model().objects.create_user(email,password)
+
+def sample_user(email='test@gmail.com', password='testpass'):
+    return get_user_model().objects.create_user(email, password)
+
 
 class ModelTests(TestCase):
 
@@ -28,7 +30,7 @@ class ModelTests(TestCase):
 
     def test_create_new_superuser(self):
         """Test creating a new superuser"""
-        user = get_user_model().objects.create_superuser('test@gmail.com','test123')
+        user = get_user_model().objects.create_superuser('test@gmail.com', 'test123')
         self.assertTrue(user.is_superuser, True)
         self.assertEqual(user.is_staff, True)
 
@@ -39,3 +41,11 @@ class ModelTests(TestCase):
             name='Vegan'
         )
         self.assertEqual(str(tag), tag.name)
+
+    # def test_ingredient_str(self):
+    #     """Test the ingredient string representation"""
+    #     ingredient = models.Ingredient.objects.create(
+    #         user=sample_user(),
+    #         name='Cucumber'
+    #     )
+    #     self.assertEqual(str(ingredient), ingredient.name)
